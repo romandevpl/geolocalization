@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController(value = "/localization")
 public class GeoController {
 
     private final GeolocalizationRepository geolocalizationRepository;
@@ -18,14 +18,14 @@ public class GeoController {
         this.geolocalizationRepository = geolocalizationRepository;
     }
 
-    @RequestMapping(value = "/localization", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> add(double altitude, double latitude) {
         this.geolocalizationRepository.save(new Geolocalization(altitude, latitude));
 
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(value = "/localization", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> read() {
         List<Geolocalization> result = geolocalizationRepository.findAll();
 
